@@ -7,7 +7,6 @@ function setup() {
 	rowsSpace  = (height/rows);
 	colsSpace = (width/cols);
 	lineSpace = (width/200);
-	maze = new Maze()
 	player = new Player();
 	seed = makeid(10);
 	selected = 0;
@@ -24,6 +23,7 @@ function draw() {
 }
 
 function keyPressed(){
+	if(keyCode === ESCAPE){state = 0; menuState = 0;}
 	if(state == 0){
 		if(menuState == 0)mainMenuControls();
 		if(menuState == 1)playMenuControls();

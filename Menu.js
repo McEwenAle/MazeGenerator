@@ -112,13 +112,14 @@ function playMenuControls(){
 	if(keyCode === BACKSPACE)seed = seed.slice(0, -1);
 	if(keyCode === ENTER && enterPass){
 		state = 1;
+		player.reset();
+		maze = new Maze();
 		maze.GenerateMaze();
 		enterPass = false; 
 	}
 }
 
 function settingsControls(){
-	if(keyCode === ESCAPE)menuState = 0
 	if(keyCode == ENTER && enterPass)memoryMode = !memoryMode;
 }
 

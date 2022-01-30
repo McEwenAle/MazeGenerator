@@ -57,7 +57,7 @@ class Player{
 				if(!this.vision[i][j])rect(i*rowsSpace, j*colsSpace, rowsSpace, colsSpace);
 			}
 		}
-	}	
+	}
 
 	//Reset
 	reset(){
