@@ -22,7 +22,7 @@ class Player{
 		}
 		if(this.x == rows - 1 && this.y == cols - 1){
 			setTimeout(()=>{}, 1000);
-			state = 3;
+			state = 2;
 		}
 	}
 
@@ -64,6 +64,5 @@ class Player{
 		this.x = 0;
 		this.y = 0;
 		this.vision = zeros([rows, cols]);
-
 	}
 }

@@ -40,15 +40,22 @@ function drawSettingsMenu(){
 	textSize(72);
 	fill('#A1C181');
 	text('Maze Generator', 145, 122);
-	selectionBox(250, 220, 300, 73, 0);
-	selectionBox(250, 370, 300, 73, 1);
-	selectionBox(78, 520, 625, 73, 2);
+	selectionBox(78, 350, 625, 73, 0	);
 	strokeWeight(1);
 	fill('#A1C181');
-	text('Rows:'+rows, 262, 282);
-	text('Cols:'+cols, 282, 430);
-	if(memoryMode)text('Memory Mode:ON', 78, 582);
-	else text("Memory Mode:OFF", 78, 582);
+	if(memoryMode)text('Memory Mode:ON', 78, 412);
+	else text("Memory Mode:OFF", 78, 412);
+}
+
+function drawWinScreen(){
+	strokeWeight(1)
+	background("#233D4D");
+	textSize(72);
+	fill('#A1C181');
+	text('You win', 250, 350);
+	textSize(48);
+	text('Press Enter to continue', 150, 412)
+	
 }
 
 function drawGame(){
@@ -91,12 +98,16 @@ function mainMenuControls(){
 	if((keyCode === DOWN_ARROW || key === 's' || key === 'S') && selected < 1)selected++;
 	if(keyCode === ENTER && enterPass){
 		if(selected == 0)menuState = 1;
-		if(selected == 1)menuState = 2;
+		if(selected == 1){
+			selected = 0
+			menuState = 2;
+		}
 		enterPass = false;
 	}
 }
 
 function playMenuControls(){
+	if(keyCode === ESCAPE)menuState = 0
 	if(isAlphaNumeric(key) && key.length === 1 && seed.length < 10)seed += key
 	if(keyCode === BACKSPACE)seed = seed.slice(0, -1);
 	if(keyCode === ENTER && enterPass){
@@ -108,25 +119,7 @@ function playMenuControls(){
 
 function settingsControls(){
 	if(keyCode === ESCAPE)menuState = 0
-	if(keyCode === UP_ARROW || key === 'w' || key === 'W'){
-		if(addState){
-			if(selected == 0 && rows < 40)rows++;
-			if(selected == 1 && cols < 40)cols++;
-		}
-		else if(selected > 0) selected--;
-	}
-	if(keyCode === DOWN_ARROW || key === 's' || key === 'S'){
-		if(addState){
-			if(selected == 0 && rows > 1)rows--;
-			if(selected == 1 && cols > 1)cols--;
-		}
-		else if(selected < 2)selected++;
-	}
-	if(keyCode == ENTER && enterPass){
-		if(selected == 0)addState = !addState;
-		if(selected == 1)addState = !addState;
-		if(selected == 2)memoryMode = !memoryMode;
-	}
+	if(keyCode == ENTER && enterPass)memoryMode = !memoryMode;
 }
 
 function playerControls(){
@@ -134,6 +127,12 @@ function playerControls(){
 	if(keyCode === RIGHT_ARROW || key === 'd' || key === 'D')player.moveRight();
 	if(keyCode === UP_ARROW || key === 'w' || key === 'W')player.moveUp();
 	if(keyCode === DOWN_ARROW || key === 's' || key === 'S')player.moveDown();
+}
+
+function winScreenControls(){
+	if(keyCode === ENTER && enterPass){
+		state = 3
+	}
 }
 
 function isAlphaNumeric(str) {

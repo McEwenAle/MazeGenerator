@@ -19,7 +19,7 @@ function setup() {
 function draw() {
 	if(state == 0)drawMenu();
 	if(state == 1)drawGame();
-	if(state == 2)winScreen();
+	if(state == 2)drawWinScreen();
 	if(state == 3)resetGame();
 }
 
@@ -30,6 +30,7 @@ function keyPressed(){
 		if(menuState == 2)settingsControls();
 	}
 	if(state == 1)playerControls();
+	if(state == 2)winScreenControls();
 	enterPass = true;
 }
 
